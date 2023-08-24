@@ -26,6 +26,12 @@ elseif($action == 'login'){
 elseif($action == 'logout'){
     $controllerObj->logoutUser();
 }
+elseif($action == 'curl'){
+    $controllerObj->curlFunction();
+}
+elseif($action == 'curl-example'){
+    $controllerObj->curlExampleFunction();
+}
 elseif($action == 'edit-w'){
     if(isset($_GET['id']) && $isAdmin == 1){
         $controllerObj->editWorkerData($_GET['id']);

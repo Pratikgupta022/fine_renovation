@@ -84,7 +84,8 @@ class Controllers
                         $_SESSION['loggedUser'] = $loginResult;
                         header("LOCATION: " . BASE_URL);
                     } else {
-                        echo "Wrong Credentials";
+                        echo "Wrong Credentials > ";
+                        echo "<a href='" . BASE_ACTION_URL . "login'>Back to Login</a>";
                         exit;
                     }
                 } else {
@@ -174,5 +175,48 @@ class Controllers
             }
         }
         return $errors;
+    }
+
+    public function curlFunction(){
+        $url = 'http://localhost/fine_renovation/index.php?action=curl-example&name=Pratik';
+
+        /* CURL GET URL METHOD */
+        // $ch = curl_init();
+        // curl_setopt($ch, CURLOPT_URL,$url);
+        // curl_exec($ch);
+        // curl_close($ch);
+        
+        /* CURL POST URL METHOD */
+        // $ch = curl_init();
+        // curl_setopt($ch, CURLOPT_URL,$url);
+        // // curl_setopt($ch, CURLOPT_RETURNTRANSFER,TRUE);
+        // curl_setopt($ch, CURLOPT_POSTFIELDS,array('name'=>'Pratik'));
+        // $data = curl_exec($ch);
+        // // print_r($data); 
+        // curl_close($ch);
+        
+        /* CURL POST FILE DOWNLOADING METHOD */
+        $imageURL = 'https://upload.wikimedia.org/wikipedia/commons/c/c8/Altja_j%C3%B5gi_Lahemaal.jpg';
+        $date = date('Y-m-d H:i:s');
+        print_r($date); die;
+        $imageName = 'image.jpg';
+        $fImage = fopen($imageName, 'w+');
+        $ch = curl_init($imageURL);
+        // curl_setopt($ch, CURLOPT_RETURNTRANSFER,TRUE);
+        curl_setopt($ch, CURLOPT_FILE, $fImage);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 1000);
+        $result = curl_exec($ch);
+        print_r($result);
+        curl_close($ch);
+        fclose($fImage);
+
+    }
+
+    public function curlExampleFunction(){
+        /* CURL GET URL METHOD */
+        // echo 'name = '.$_GET['name'];
+
+        /* CURL POST URL METHOD */
+        print_r('Name : '.$_POST['name']); 
     }
 }

@@ -34,7 +34,7 @@ class Model extends Config{
         $sql = "SELECT email FROM $tableName where email = '$email'";
         $result = $this->conn()->query($sql);
         if(mysqli_num_rows($result) > 0){
-            return false;
+            return array('email'=>'Email already exists');
         }else{
             return true;
         }
@@ -60,7 +60,7 @@ class Model extends Config{
     }
 
     public function getAllUsersData(){
-        $sql = "select * from workers where is_admin='0' order by created_at desc limit 10 ";
+        $sql = "select * from ".WORKERS_TABLE." where is_admin='0' order by created_at desc limit 10 ";
         $res = $this->conn()->query($sql);
         $data=array();
         if (mysqli_num_rows($res)>0){
